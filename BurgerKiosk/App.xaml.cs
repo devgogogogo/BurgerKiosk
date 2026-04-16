@@ -16,6 +16,7 @@ namespace BurgerKiosk
     // Serilog 는 로그를 파일/콘솔에 남겨주는 라이브러리
     public partial class App : Application
     {
+        //IHost 는 DI 컨테이너를 담는 인터페이스예요.
         private IHost _host;
 
         public App()
@@ -39,6 +40,7 @@ namespace BurgerKiosk
                 })
                 .ConfigureServices((context, services) =>
                 {
+                    //자바로 따지면 여기가 Bean 등록하는 곳
                     services.AddDbContext<AppDbContext>(options =>   // AppDbContext DI 등록
                         options.UseSqlServer(
                             context.Configuration.GetConnectionString("DefaultConnection"))); // 연결문자열 읽기

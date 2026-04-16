@@ -9,7 +9,8 @@ namespace BurgerKiosk.Repositories
 {
     public class MenuRepository : IMenuRepository
     {
-        private readonly AppDbContext _context;
+        //readonly 는 final = readonly
+        private readonly AppDbContext _context; // DB 컨텍스트 필드 선언
 
         public MenuRepository(AppDbContext context)
         {
