@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BurgerKiosk.Migrations
 {
+    //마이그레이션
+    //C# 클래스를 DB 테이블로 변환하는 작업임
     /// <inheritdoc />
     public partial class InitialCreate : Migration
     {
