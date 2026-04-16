@@ -1,4 +1,7 @@
 ﻿using BurgerKiosk.Data;
+using BurgerKiosk.Repositories;
+using BurgerKiosk.Services;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -7,7 +10,6 @@ using System.Configuration;
 using System.Data;
 using System.IO;
 using System.Windows;
-using Microsoft.EntityFrameworkCore;
 
 namespace BurgerKiosk
 {
@@ -41,9 +43,15 @@ namespace BurgerKiosk
                 .ConfigureServices((context, services) =>
                 {
                     //자바로 따지면 여기가 Bean 등록하는 곳
-                    services.AddDbContext<AppDbContext>(options =>   // AppDbContext DI 등록
-                        options.UseSqlServer(
-                            context.Configuration.GetConnectionString("DefaultConnection"))); // 연결문자열 읽기
+                    // AppDbContext DI 등록
+                    services.AddDbContext<AppDbContext>(options => options.UseSqlServer(context.Configuration.GetConnectionString("DefaultConnection"))); // 연결문자열 읽기
+                    // Repository 등록
+                    services.AddScoped<MenuRepository>();
+                    services.AddScoped<OrderRepository>();
+
+                    // Service 등록
+                    services.AddScoped<MenuService>();
+                    services.AddScoped<OrderService>();
                 })
                 .Build();
         }

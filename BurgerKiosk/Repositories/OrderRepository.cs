@@ -7,7 +7,7 @@ using System.Text;
 
 namespace BurgerKiosk.Repositories
 {
-    public class OrderRepository : IOrderRepository
+    public class OrderRepository 
     {
         private readonly AppDbContext _context; //readonly는 final 같은 것임
 

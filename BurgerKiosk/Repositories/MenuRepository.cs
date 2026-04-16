@@ -7,7 +7,7 @@ using System.Text;
 
 namespace BurgerKiosk.Repositories
 {
-    public class MenuRepository : IMenuRepository
+    public class MenuRepository 
     {
         //readonly 는 final = readonly
         private readonly AppDbContext _context; // DB 컨텍스트 필드 선언
@@ -22,7 +22,7 @@ namespace BurgerKiosk.Repositories
             return await _context.Menus.ToListAsync();
         }
 
-        public async Task<Menu?> GetBtIdAsync(int id)
+        public async Task<Menu?> GetByIdAsync(int id)
         {
             return await _context.Menus.FindAsync(id);
         }
