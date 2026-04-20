@@ -1,6 +1,8 @@
 ﻿using BurgerKiosk.Data;
 using BurgerKiosk.Repositories;
 using BurgerKiosk.Services;
+using BurgerKiosk.ViewModels;
+using BurgerKiosk.Views;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -52,6 +54,12 @@ namespace BurgerKiosk
                     // Service 등록
                     services.AddScoped<MenuService>();
                     services.AddScoped<OrderService>();
+
+                    // ViewModel 등록
+                    services.AddScoped<MenuViewModel>();
+
+                    // View 등록
+                    services.AddScoped<MenuView>();
                 })
                 .Build();
         }
@@ -59,6 +67,8 @@ namespace BurgerKiosk
         protected override async void OnStartup(StartupEventArgs e) // 앱 시작할때 실행
         {
             await _host.StartAsync(); // DI 컨테이너 시작
+            MenuView menuView = _host.Services.GetRequiredService<MenuView>();
+            menuView.Show();
             base.OnStartup(e); // WPF 기본 시작 로직 실행
         }
 

@@ -1,0 +1,53 @@
+﻿<Window x:Class="BurgerKiosk.Views.MenuView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BurgerKiosk.Views"
+        mc:Ignorable="d"
+        Title="MenuView" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+        
+        <!-- HorizontalAlignment="Center" — 가로 가운데 정렬 -->
+        <!-- VerticalAlignment="Center" — 세로 가운데 정렬 -->
+        <TextBlock Grid.Row="0"
+                   Text="버거 키오스크"
+                   FontSize="32"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
+        <!-- ItemsControl — 여러 개의 아이템을 반복해서 보여주는 컨트롤 -->
+        <ItemsControl Grid.Row="1"
+                      x:Name="MenuList"
+                      ItemsSource="{Binding Menus}"
+                      Margin="20">
+            <!-- ItemsPanel — 아이템들을 어떤 방식으로 배치할지 정의 -->
+            <ItemsControl.ItemsPanel>
+                <!-- ItemsPanelTemplate — 배치 방식의 템플릿 -->
+                <ItemsPanelTemplate>
+                    <!-- WrapPanel — 아이템이 많으면 자동으로 줄바꿈 -->
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <!-- DataTemplate — 아이템 하나하나의 모양을 정의 -->
+                <DataTemplate>
+                    <Button Width="150" Height="150"
+                            Margin="10"
+                            Content="{Binding Name}"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <Button Grid.Row="2"
+                Content="장바구니 보기"
+                Width="200" Height="50"
+                HorizontalAlignment="Right"
+                Margin="20"/>
+    </Grid>
+</Window>
