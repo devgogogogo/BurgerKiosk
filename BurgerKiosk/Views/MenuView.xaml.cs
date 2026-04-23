@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BurgerKiosk.Views
 {
@@ -38,6 +39,13 @@ namespace BurgerKiosk.Views
             // 화면이 완전히 렌더링된 후에 메뉴 로드
             MenuViewModel viewModel = (MenuViewModel)DataContext;
             await viewModel.LoadMenusAsync();
+        }
+
+        private void CartButton_Click(object sender, RoutedEventArgs e)
+        {
+            // DI 컨테이너에서 CartView 꺼내서 화면 띄우기
+            CartView cartView = App.ServiceProvider.GetRequiredService<CartView>();
+            cartView.Show();
         }
     }
 }

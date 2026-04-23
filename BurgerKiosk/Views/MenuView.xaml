@@ -39,7 +39,9 @@
                 <DataTemplate>
                     <Button Width="150" Height="150"
                             Margin="10"
-                            Content="{Binding Name}"/>
+                            Content="{Binding Name}"
+                            Command="{Binding DataContext.AddToCartCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                            CommandParameter="{Binding}"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
@@ -48,6 +50,7 @@
                 Content="장바구니 보기"
                 Width="200" Height="50"
                 HorizontalAlignment="Right"
-                Margin="20"/>
+                Margin="20"
+                Click="CartButton_Click"/>
     </Grid>
 </Window>

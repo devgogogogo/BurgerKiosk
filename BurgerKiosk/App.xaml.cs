@@ -22,6 +22,7 @@ namespace BurgerKiosk
     {
         //IHost 는 DI 컨테이너를 담는 인터페이스예요.
         private IHost _host;
+        public static IServiceProvider ServiceProvider { get; private set; } = null!;
 
         public App()
         {
@@ -56,10 +57,12 @@ namespace BurgerKiosk
                     services.AddScoped<OrderService>();
 
                     // ViewModel 등록
+                    services.AddScoped<CartViewModel>();
                     services.AddScoped<MenuViewModel>();
 
                     // View 등록
                     services.AddScoped<MenuView>();
+                    services.AddScoped<CartView>(); 
                 })
                 .Build();
         }
@@ -67,7 +70,9 @@ namespace BurgerKiosk
         protected override async void OnStartup(StartupEventArgs e) // 앱 시작할때 실행
         {
             await _host.StartAsync(); // DI 컨테이너 시작
+            
             MenuView menuView = _host.Services.GetRequiredService<MenuView>();
+            ServiceProvider = _host.Services;
             menuView.Show();
             base.OnStartup(e); // WPF 기본 시작 로직 실행
         }

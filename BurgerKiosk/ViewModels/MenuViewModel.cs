@@ -13,14 +13,13 @@ namespace BurgerKiosk.ViewModels
     {
 
         private readonly MenuService _menuService;
-
-        public MenuViewModel(MenuService menuService)
+        private readonly CartViewModel _cartViewModel; // 장바구니 ViewModel 주입
+        public MenuViewModel(MenuService menuService,CartViewModel cartViewModel)
         {
             _menuService = menuService;
+            _cartViewModel = cartViewModel;
         }
 
-        // [ObservableProperty] — _ 소문자 필드 선언하면
-        // CommunityToolkit 이 대문자 프로퍼티(Menus) 자동 생성
         // ObservableCollection — 리스트가 바뀌면 화면에 자동으로 알림
         [ObservableProperty]
         private ObservableCollection<Menu> _menus = new();
@@ -33,13 +32,19 @@ namespace BurgerKiosk.ViewModels
             List<Menu> menus = await _menuService.GetAllMenusAsync();
             Menus = new ObservableCollection<Menu>(menus);
         }
+
+        // 메뉴 버튼 클릭 — 장바구니에 메뉴 추가
+        [RelayCommand]
+        private void AddToCart(Menu menu)
+        {
+            _cartViewModel.AddItem(menu);
+        }
     }
 }
 
 /*
  [ObservableProperty] 동작 원리
  
- 우리가 작성:
  [ObservableProperty]
  private ObservableCollection<Menu> _menus = new();
  
