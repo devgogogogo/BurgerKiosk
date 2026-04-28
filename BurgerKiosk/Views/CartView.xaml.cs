@@ -24,5 +24,11 @@ namespace BurgerKiosk.Views
             // DataContext — CartView 가 바라볼 ViewModel 지정
             DataContext = cartViewModel;
         }
+
+        // 뒤로가기 버튼 클릭 - CartView 닫기
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close(); //현재 창 닫기
+        }
     }
 }

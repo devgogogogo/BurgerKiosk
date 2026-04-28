@@ -72,6 +72,33 @@ namespace BurgerKiosk.ViewModels
             CartItems.Remove(item);
             OnPropertyChanged(nameof(TotalPrice));
         }
+        // CommunityToolkit 이 자동 생성
+        //public IRelayCommand RemoveItemCommand { get; } 가 자동생성
+        // 메서드 이름 RemoveItem → RemoveItemCommand 로 자동 생성
+
+        //수량증가 
+        [RelayCommand]
+        private void IncreaseQuantity(CartItem item)
+        {
+            item.Quantity++;
+            OnPropertyChanged(nameof(TotalPrice));
+        }
+        //수량감소
+        [RelayCommand]
+        private void DecreaseQuantity(CartItem item)
+        {
+            //수량이 1이하면 삭제
+            if (item.Quantity <= 1)
+            {
+                CartItems.Remove(item);
+
+            }
+            else
+            {
+                item.Quantity--;
+            }
+            OnPropertyChanged(nameof(TotalPrice));
+        }
 
         // 주문 완료
         [RelayCommand]

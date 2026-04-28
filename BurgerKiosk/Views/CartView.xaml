@@ -30,8 +30,40 @@
                 <GridView>
                     <GridViewColumn Header="메뉴"  Width="150" DisplayMemberBinding="{Binding Menu.Name}"/>
                     <GridViewColumn Header="가격"  Width="80" DisplayMemberBinding="{Binding Menu.Price}"/>
-                    <GridViewColumn Header="수량"  Width="80" DisplayMemberBinding="{Binding Quantity}"/>
+                    <GridViewColumn Header="수량" Width="120">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="-"
+                                            Width="25"
+                                            Height="25"
+                                            Command="{Binding DataContext.DecreaseQuantityCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                            CommandParameter="{Binding}"/>
+                                    <TextBlock Text="{Binding Quantity}"
+                                               Width="30"
+                                               TextAlignment="Center"
+                                               VerticalAlignment="Center"/>
+                                    <Button Content="+"
+                                            Width="25"
+                                            Height="25"
+                                            Command="{Binding DataContext.IncreaseQuantityCommand,RelativeSource={RelativeSource AncestorType=ListView}}"
+                                            CommandParameter="{Binding}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                     <GridViewColumn Header="합계"  Width="80" DisplayMemberBinding="{Binding TotalPrice}"/>
+                    <GridViewColumn Header="삭제" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="삭제"
+                                        Width="60"
+                                        Height="25"
+                                        Command="{Binding DataContext.RemoveItemCommand,RelativeSource={RelativeSource AncestorType=ListView} }"
+                                        CommandParameter="{Binding}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -62,7 +94,8 @@
             <Button Content ="뒤로가기"
                     Width="100"
                     Height="40"
-                    Margin="5"/>
+                    Margin="5"
+                    Click="BackButton_Click"/>
             <Button Content ="주문완료"
                     Width="100"
                     Height="40"
