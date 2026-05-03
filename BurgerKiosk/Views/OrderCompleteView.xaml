@@ -1,0 +1,42 @@
+﻿<Window x:Class="BurgerKiosk.Views.OrderCompleteView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BurgerKiosk.Views"
+        mc:Ignorable="d"
+        Title="주문완료 " Height="300" Width="400"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+
+        <!-- 주문 완료 메시지 -->
+        <!-- VerticalAlignment="Center" — 세로 방향으로 가운데 정렬 -->
+        <!-- HorizontalAlignment="Center" — 가로 방향으로 가운데 정렬 -->
+        <StackPanel Grid.Row="0"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+            <TextBlock Text="주문이 완료되었습니다!"
+                       FontSize="24"
+                       FontWeight="Bold"
+                       HorizontalAlignment="Center"/>
+            <!-- Margin="0,10,0,0" — 위쪽 여백 10 (순서: 왼쪽, 위, 오른쪽, 아래) -->
+            <TextBlock Text="잠시 후 준비해 드리겠습니다."
+                       FontSize="24"
+                       FontWeight="Bold"
+                       HorizontalAlignment="Center"
+                       Margin="0,10,0,0"/>
+        </StackPanel>
+        <!-- 확인 버튼 -->
+        <!-- HorizontalAlignment="Center" — 버튼을 가로 가운데 정렬 -->
+        <Button Grid.Row="1"
+                Content="확인"
+                Width="120"
+                Height="40"
+                HorizontalAlignment="Center"
+                Click="ConfirmButton_Click"/>
+    </Grid>
+</Window>

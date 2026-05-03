@@ -13,6 +13,9 @@ namespace BurgerKiosk.ViewModels
     {
         private readonly OrderService _orderService;
 
+        //주문 완료 이벤트 선언
+        public event EventHandler? OrderCompleted;
+
         public CartViewModel(OrderService orderService)
         {
             _orderService = orderService;
@@ -134,6 +137,9 @@ namespace BurgerKiosk.ViewModels
             // 6. TotalPrice 화면 업데이트 (장바구니 비웠으니 0 으로)     
             // OnPropertyChanged → 화면에 "이 프로퍼티 값이 바뀌었어, 다시 그려줘" 라고 알려주는 메서드
             OnPropertyChanged(nameof(TotalPrice));
+
+            //주문 완료 이벤트 발생
+            OrderCompleted?.Invoke(this, EventArgs.Empty);
         }
     }
 }
