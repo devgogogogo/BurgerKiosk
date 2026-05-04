@@ -51,5 +51,15 @@ namespace BurgerKiosk.Repositories
             _context.Orders.Update(order);         // 주문 수정
             await _context.SaveChangesAsync();     // DB 에 반영
         }
+
+        public async Task DeleteOrderAsync(int id)
+        {
+            Order? order = await _context.Orders.FindAsync(id);
+            if (order != null)
+            {
+                _context.Orders.Remove(order);
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }

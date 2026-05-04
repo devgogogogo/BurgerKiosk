@@ -45,12 +45,21 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-
-        <Button Grid.Row="2"
-                Content="장바구니 보기"
-                Width="200" Height="50"
-                HorizontalAlignment="Right"
-                Margin="20"
-                Click="CartButton_Click"/>
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Margin="20">
+            <Button Content="관리자"
+                    Width="100" Height="50"
+                    HorizontalAlignment="Right"
+                    Margin="5"
+                    Click="AdminButton_Click"/>
+            <Button Content="장바구니 보기"
+                    Width="200" Height="50"
+                    HorizontalAlignment="Right"
+                    Margin="5"
+                    Click="CartButton_Click"/>
+        </StackPanel>
+        
     </Grid>
 </Window>

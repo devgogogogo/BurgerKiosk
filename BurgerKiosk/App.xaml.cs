@@ -59,10 +59,12 @@ namespace BurgerKiosk
                     // ViewModel 등록
                     services.AddScoped<CartViewModel>();
                     services.AddScoped<MenuViewModel>();
+                    services.AddScoped<AdminViewModel>();
 
                     // View 등록
-                    services.AddScoped<MenuView>();
-                    services.AddScoped<CartView>(); 
+                    services.AddTransient<MenuView>();
+                    services.AddTransient<CartView>();
+                    services.AddTransient<AdminView>();
                 })
                 .Build();
         }

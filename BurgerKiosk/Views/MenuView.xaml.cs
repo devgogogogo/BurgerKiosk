@@ -41,11 +41,19 @@ namespace BurgerKiosk.Views
             await viewModel.LoadMenusAsync();
         }
 
+        // 장바구니 버튼 클릭 - CartView 띄우기
         private void CartButton_Click(object sender, RoutedEventArgs e)
         {
             // DI 컨테이너에서 CartView 꺼내서 화면 띄우기
             CartView cartView = App.ServiceProvider.GetRequiredService<CartView>();
             cartView.Show();
+        }
+
+        // 관리자 버튼 클릭 - AdminView 띄우기
+        private void AdminButton_Click(object sender, RoutedEventArgs e)
+        {
+            AdminView adminView = App.ServiceProvider.GetRequiredService<AdminView>();
+            adminView.Show();
         }
     }
 }

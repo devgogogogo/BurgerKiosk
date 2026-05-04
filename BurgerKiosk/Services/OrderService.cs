@@ -58,5 +58,12 @@ namespace BurgerKiosk.Services
             await _orderRepository.UpdateOrderAsync(order);
             _logger.LogInformation("주문 상태 변경 완료 - OrderId: {Id}, Status: {Status}", id, status);
         }
+
+        public async Task DeleteOrderAsync(int id)
+        {
+            _logger.LogInformation("주문 삭제 시작 - OrderId: {Id}", id);
+            await _orderRepository.DeleteOrderAsync(id);
+            _logger.LogInformation("주문 삭제 완료 - OrderId: {Id}", id);
+        }
     }
 }
