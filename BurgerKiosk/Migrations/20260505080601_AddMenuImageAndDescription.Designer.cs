@@ -4,6 +4,7 @@ using BurgerKiosk.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BurgerKiosk.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260505080601_AddMenuImageAndDescription")]
+    partial class AddMenuImageAndDescription
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,8 +64,8 @@ namespace BurgerKiosk.Migrations
                         {
                             Id = 1,
                             Category = "버거",
-                            Description = "달콤한 불고기 소스와 신선한 야채",
-                            ImagePath = "/Images/bulgogi.png",
+                            Description = "",
+                            ImagePath = "",
                             IsAvailable = true,
                             Name = "불고기버거",
                             Price = 5000
@@ -71,8 +74,8 @@ namespace BurgerKiosk.Migrations
                         {
                             Id = 2,
                             Category = "버거",
-                            Description = "고소한 체다치즈가 가득한 버거",
-                            ImagePath = "/Images/cheese.png",
+                            Description = "",
+                            ImagePath = "",
                             IsAvailable = true,
                             Name = "치즈버거",
                             Price = 4500
@@ -81,8 +84,8 @@ namespace BurgerKiosk.Migrations
                         {
                             Id = 3,
                             Category = "버거",
-                            Description = "탱글탱글한 새우 패티 버거",
-                            ImagePath = "/Images/shrimp.png",
+                            Description = "",
+                            ImagePath = "",
                             IsAvailable = true,
                             Name = "새우버거",
                             Price = 4000
@@ -91,8 +94,8 @@ namespace BurgerKiosk.Migrations
                         {
                             Id = 4,
                             Category = "음료",
-                            Description = "시원하고 청량한 코카콜라",
-                            ImagePath = "/Images/cola.png",
+                            Description = "",
+                            ImagePath = "",
                             IsAvailable = true,
                             Name = "콜라",
                             Price = 2000
@@ -101,8 +104,8 @@ namespace BurgerKiosk.Migrations
                         {
                             Id = 5,
                             Category = "음료",
-                            Description = "톡 쏘는 청량한 사이다",
-                            ImagePath = "/Images/cider.png",
+                            Description = "",
+                            ImagePath = "",
                             IsAvailable = true,
                             Name = "사이다",
                             Price = 2000
@@ -111,8 +114,8 @@ namespace BurgerKiosk.Migrations
                         {
                             Id = 6,
                             Category = "사이드",
-                            Description = "바삭하고 짭짤한 감자튀김",
-                            ImagePath = "/Images/fries.png",
+                            Description = "",
+                            ImagePath = "",
                             IsAvailable = true,
                             Name = "감자튀김",
                             Price = 2500
@@ -121,8 +124,8 @@ namespace BurgerKiosk.Migrations
                         {
                             Id = 7,
                             Category = "사이드",
-                            Description = "바삭한 튀김옷의 양파링",
-                            ImagePath = "/Images/onionring.png",
+                            Description = "",
+                            ImagePath = "",
                             IsAvailable = true,
                             Name = "양파링",
                             Price = 2500

@@ -18,6 +18,10 @@ namespace BurgerKiosk.Models
         public int Price { get; set; } // 가격
         [Required]
         public string Category { get; set; } = string.Empty; // 버거/사이드/음료
-        public bool IsAvailable { get; set; } =true; //품절 여부 — 기본값 true (판매중)
+        public bool IsAvailable { get; set; } = true; //품절 여부 — 기본값 true (판매중)
+
+        public string ImagePath { get; set; } = string.Empty; // 이미지 경로
+
+        public string Description { get; set; } = string.Empty; // 메뉴 설명
     }
 }

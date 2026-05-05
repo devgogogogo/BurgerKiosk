@@ -5,61 +5,171 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BurgerKiosk.Views"
         mc:Ignorable="d"
-        Title="MenuView" Height="450" Width="800">
+        Title="버거 키오스크" Height="700" Width="500"
+        WindowStartupLocation="CenterScreen"
+        Background="#F5F5F5">
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="80"/>
+            <RowDefinition Height="70"/>
         </Grid.RowDefinitions>
-        
-        <!-- HorizontalAlignment="Center" — 가로 가운데 정렬 -->
-        <!-- VerticalAlignment="Center" — 세로 가운데 정렬 -->
-        <TextBlock Grid.Row="0"
-                   Text="버거 키오스크"
-                   FontSize="32"
-                   FontWeight="Bold"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"/>
-        <!-- ItemsControl — 여러 개의 아이템을 반복해서 보여주는 컨트롤 -->
-        <ItemsControl Grid.Row="1"
-                      x:Name="MenuList"
-                      ItemsSource="{Binding Menus}"
-                      Margin="20">
-            <!-- ItemsPanel — 아이템들을 어떤 방식으로 배치할지 정의 -->
-            <ItemsControl.ItemsPanel>
-                <!-- ItemsPanelTemplate — 배치 방식의 템플릿 -->
-                <ItemsPanelTemplate>
-                    <!-- WrapPanel — 아이템이 많으면 자동으로 줄바꿈 -->
-                    <WrapPanel/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <!-- DataTemplate — 아이템 하나하나의 모양을 정의 -->
-                <DataTemplate>
-                    <Button Width="150" Height="150"
-                            Margin="10"
-                            Content="{Binding Name}"
-                            Command="{Binding DataContext.AddToCartCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                            CommandParameter="{Binding}"/>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-        <StackPanel Grid.Row="2"
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Right"
-                    Margin="20">
-            <Button Content="관리자"
-                    Width="100" Height="50"
-                    HorizontalAlignment="Right"
-                    Margin="5"
-                    Click="AdminButton_Click"/>
-            <Button Content="장바구니 보기"
-                    Width="200" Height="50"
-                    HorizontalAlignment="Right"
-                    Margin="5"
-                    Click="CartButton_Click"/>
-        </StackPanel>
-        
+
+        <!-- 상단 헤더 -->
+        <Border Grid.Row="0" Background="#F97316">
+            <Grid Margin="20 0">
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="버거 키오스크"
+                               FontSize="22" FontWeight="Bold"
+                               Foreground="White"/>
+                    <TextBlock Text="메뉴를 선택해주세요"
+                               FontSize="12"
+                               Foreground="#FFE0C8"/>
+                </StackPanel>
+                <Button Content="관리자"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Width="70" Height="34"
+                        Background="Transparent"
+                        Foreground="White"
+                        BorderBrush="White"
+                        BorderThickness="1"
+                        Click="AdminButton_Click"/>
+            </Grid>
+        </Border>
+
+        <!-- 메뉴 목록 -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="MenuList"
+                          ItemsSource="{Binding Menus}"
+                          Margin="12">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="0 0 0 10"
+                                Background="White"
+                                CornerRadius="12"
+                                BorderBrush="#E5E5E5"
+                                BorderThickness="1">
+                            <Grid Margin="12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="40"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- 메뉴 이미지 -->
+                                <Border Grid.Column="0"
+                                        Width="72" Height="72"
+                                        CornerRadius="10"
+                                        ClipToBounds="True">
+                                    <Image Source="{Binding ImagePath}"
+                                           Stretch="UniformToFill"/>
+                                </Border>
+
+                                <!-- 메뉴 정보 -->
+                                <StackPanel Grid.Column="1"
+                                            Margin="12 0 0 0"
+                                            VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding Name}"
+                                               FontSize="15"
+                                               FontWeight="Bold"
+                                               Foreground="#1C1917"/>
+                                    <TextBlock Text="{Binding Description}"
+                                               FontSize="11"
+                                               Foreground="#888"
+                                               Margin="0 4 0 0"
+                                               TextWrapping="Wrap"/>
+                                    <TextBlock FontSize="15"
+                                               FontWeight="Bold"
+                                               Foreground="#F97316"
+                                               Margin="0 8 0 0">
+                                        <Run Text="₩"/>
+                                        <Run Text="{Binding Price, StringFormat='{}{0:N0}'}"/>
+                                    </TextBlock>
+                                </StackPanel>
+
+                                <!-- 추가 버튼 -->
+                                <Button Grid.Column="2"
+                                        Width="32" Height="32"
+                                        Content="+"
+                                        FontSize="20"
+                                        Background="#F97316"
+                                        Foreground="White"
+                                        BorderThickness="0"
+                                        VerticalAlignment="Center"
+                                        Command="{Binding DataContext.AddToCartCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                        CommandParameter="{Binding}">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border Background="{TemplateBinding Background}"
+                                                    CornerRadius="16"
+                                                    Width="32" Height="32">
+                                                <ContentPresenter HorizontalAlignment="Center"
+                                                                  VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <!-- 하단 장바구니 바 -->
+        <Border Grid.Row="2" Background="#1C1917">
+            <Grid Margin="20 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- 장바구니 아이콘 -->
+                <Border Grid.Column="0"
+                        Width="36" Height="36"
+                        CornerRadius="18"
+                        Background="#333"
+                        VerticalAlignment="Center">
+                    <TextBlock Text="🛒"
+                               FontSize="16"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                </Border>
+
+                <!-- 장바구니 텍스트 -->
+                <StackPanel Grid.Column="1"
+                            Margin="12 0 0 0"
+                            VerticalAlignment="Center">
+                    <TextBlock Text="장바구니"
+                               FontSize="12"
+                               Foreground="#888"/>
+                </StackPanel>
+
+                <!-- 장바구니 보기 버튼 -->
+                <Button Grid.Column="2"
+                        Content="장바구니 보기"
+                        Width="130" Height="40"
+                        Background="#F97316"
+                        Foreground="White"
+                        BorderThickness="0"
+                        FontSize="13"
+                        FontWeight="Bold"
+                        VerticalAlignment="Center"
+                        Click="CartButton_Click">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}"
+                                    CornerRadius="10">
+                                <ContentPresenter HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+        </Border>
     </Grid>
 </Window>

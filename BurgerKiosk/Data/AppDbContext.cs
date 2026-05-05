@@ -17,13 +17,76 @@ namespace BurgerKiosk.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Menu>().HasData(
-                new Menu { Id = 1, Name = "불고기버거", Price = 5000, Category = "버거", IsAvailable = true },
-                new Menu { Id = 2, Name = "치즈버거", Price = 4500, Category = "버거", IsAvailable = true },
-                new Menu { Id = 3, Name = "새우버거", Price = 4000, Category = "버거", IsAvailable = true },
-                new Menu { Id = 4, Name = "콜라", Price = 2000, Category = "음료", IsAvailable = true },
-                new Menu { Id = 5, Name = "사이다", Price = 2000, Category = "음료", IsAvailable = true },
-                new Menu { Id = 6, Name = "감자튀김", Price = 2500, Category = "사이드", IsAvailable = true },
-                new Menu { Id = 7, Name = "양파링", Price = 2500, Category = "사이드", IsAvailable = true }
+                new Menu
+                {
+                    Id = 1,
+                    Name = "불고기버거",
+                    Price = 5000,
+                    Category = "버거",
+                    IsAvailable = true,
+                    Description = "달콤한 불고기 소스와 신선한 야채",
+                    ImagePath = "/Images/bulgogi.png"
+                },
+                new Menu
+                {
+                    Id = 2,
+                    Name = "치즈버거",
+                    Price = 4500,
+                    Category = "버거",
+                    IsAvailable = true,
+                    Description = "고소한 체다치즈가 가득한 버거",
+                    ImagePath = "/Images/cheese.png"
+                },
+                new Menu
+                {
+                    Id = 3,
+                    Name = "새우버거",
+                    Price = 4000,
+                    Category = "버거",
+                    IsAvailable = true,
+                    Description = "탱글탱글한 새우 패티 버거",
+                    ImagePath = "/Images/shrimp.png"
+                },
+                new Menu
+                {
+                    Id = 4,
+                    Name = "콜라",
+                    Price = 2000,
+                    Category = "음료",
+                    IsAvailable = true,
+                    Description = "시원하고 청량한 코카콜라",
+                    ImagePath = "/Images/cola.png"
+                },
+                new Menu
+                {
+                    Id = 5,
+                    Name = "사이다",
+                    Price = 2000,
+                    Category = "음료",
+                    IsAvailable = true,
+                    Description = "톡 쏘는 청량한 사이다",
+                    ImagePath = "/Images/cider.png"
+                },
+                new Menu
+                {
+                    Id = 6,
+                    Name = "감자튀김",
+                    Price = 2500,
+                    Category = "사이드",
+                    IsAvailable = true,
+                    Description = "바삭하고 짭짤한 감자튀김",
+                    ImagePath = "/Images/fries.png"
+                },
+                new Menu
+                {
+                    Id = 7,
+                    Name = "양파링",
+                    Price = 2500,
+                    Category = "사이드",
+                    IsAvailable = true,
+                    Description = "바삭한 튀김옷의 양파링",
+                    ImagePath = "/Images/onionring.png"
+                }
             );
         }
     }
