@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BurgerKiosk.Views"
         mc:Ignorable="d"
-        Title="주문완료 " Height="300" Width="400"
-        WindowStartupLocation="CenterScreen">
+        Title="주문 완료" Height="350" Width="420"
+        WindowStartupLocation="CenterScreen"
+        Background="White">
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -14,29 +16,59 @@
         </Grid.RowDefinitions>
 
         <!-- 주문 완료 메시지 -->
-        <!-- VerticalAlignment="Center" — 세로 방향으로 가운데 정렬 -->
-        <!-- HorizontalAlignment="Center" — 가로 방향으로 가운데 정렬 -->
         <StackPanel Grid.Row="0"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center">
-            <TextBlock Text="주문이 완료되었습니다!"
-                       FontSize="24"
+
+            <!-- 체크 아이콘 원 -->
+            <Border Width="80" Height="80"
+                    CornerRadius="40"
+                    Background="#FFF0E6"
+                    HorizontalAlignment="Center">
+                <TextBlock Text="✓"
+                           FontSize="40"
+                           FontWeight="Bold"
+                           Foreground="#F97316"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+            </Border>
+
+            <TextBlock Text="주문이 완료됐습니다!"
+                       FontSize="22"
                        FontWeight="Bold"
-                       HorizontalAlignment="Center"/>
-            <!-- Margin="0,10,0,0" — 위쪽 여백 10 (순서: 왼쪽, 위, 오른쪽, 아래) -->
-            <TextBlock Text="잠시 후 준비해 드리겠습니다."
-                       FontSize="24"
-                       FontWeight="Bold"
+                       Foreground="#1C1917"
                        HorizontalAlignment="Center"
-                       Margin="0,10,0,0"/>
+                       Margin="0 20 0 0"/>
+
+            <TextBlock Text="잠시 후 준비해 드리겠습니다."
+                       FontSize="14"
+                       Foreground="#888"
+                       HorizontalAlignment="Center"
+                       Margin="0 8 0 0"/>
         </StackPanel>
-        <!-- 확인 버튼 -->
-        <!-- HorizontalAlignment="Center" — 버튼을 가로 가운데 정렬 -->
-        <Button Grid.Row="1"
-                Content="확인"
-                Width="120"
-                Height="40"
-                HorizontalAlignment="Center"
-                Click="ConfirmButton_Click"/>
+
+        <!-- 하단 버튼 -->
+        <Border Grid.Row="1" Background="#F5F5F5">
+            <Button Content="확인"
+                    Width="200" Height="44"
+                    Background="#F97316"
+                    Foreground="White"
+                    BorderThickness="0"
+                    FontSize="15"
+                    FontWeight="Bold"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Click="ConfirmButton_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="10">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Border>
     </Grid>
 </Window>

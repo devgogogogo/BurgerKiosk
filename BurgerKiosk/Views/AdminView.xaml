@@ -5,64 +5,153 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BurgerKiosk.Views"
         mc:Ignorable="d"
-        Title="AdminView" Height="450" Width="800">
+        Title="관리자 화면" Height="600" Width="800"
+        WindowStartupLocation="CenterScreen"
+        Background="#F5F5F5">
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="80"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="70"/>
         </Grid.RowDefinitions>
-        
-        <!--상단 타이틀-->
-        <TextBlock Grid.Row="0"
-                   Text="주문목록"
-                   FontSize="24"
-                   FontWeight="Bold"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Center"/>
-        <!--주문목록-->
+
+        <!-- 상단 헤더 -->
+        <Border Grid.Row="0" Background="#1C1917">
+            <Grid Margin="20 0">
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="주문 관리"
+                               FontSize="22" FontWeight="Bold"
+                               Foreground="White"/>
+                    <TextBlock Text="전체 주문 목록을 확인하고 관리하세요"
+                               FontSize="12"
+                               Foreground="#888"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- 주문 목록 -->
         <DataGrid Grid.Row="1"
                   ItemsSource="{Binding Orders}"
                   AutoGenerateColumns="False"
                   IsReadOnly="True"
-                  Margin="10">
+                  Margin="12"
+                  Background="White"
+                  BorderBrush="#E5E5E5"
+                  BorderThickness="1"
+                  RowBackground="White"
+                  AlternatingRowBackground="#FFF8F5"
+                  GridLinesVisibility="Horizontal"
+                  HorizontalGridLinesBrush="#F0F0F0"
+                  ColumnHeaderHeight="44"
+                  RowHeight="48"
+                  SelectionMode="Single">
+
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="#F5F5F5"/>
+                    <Setter Property="Foreground" Value="#888"/>
+                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="Padding" Value="12 0"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Padding" Value="12 0"/>
+                    <Setter Property="FontSize" Value="13"/>
+                    <Setter Property="Foreground" Value="#1C1917"/>
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                </Style>
+            </DataGrid.CellStyle>
+
             <DataGrid.Columns>
                 <DataGridTextColumn Header="주문번호" Width="80" Binding="{Binding Id}"/>
-                <DataGridTextColumn Header="주문시간" Width="150" Binding="{Binding OrderedAt}"/>
+                <DataGridTextColumn Header="주문시간" Width="160" Binding="{Binding OrderedAt, StringFormat='{}{0:MM/dd HH:mm}'}"/>
                 <DataGridTextColumn Header="상태" Width="80" Binding="{Binding Status}"/>
-                <DataGridTextColumn Header="총금액" Width="80" Binding="{Binding TotalPrice}"/>
+                <DataGridTextColumn Header="총금액" Width="100" Binding="{Binding TotalPrice, StringFormat='{}{0:N0}원'}"/>
 
-                <!--상태 변경 버튼-->
+                <!-- 상태 변경 버튼 -->
                 <DataGridTemplateColumn Header="상태변경" Width="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Content="완료처리"
-                                    Width="80"
-                                    Height="25"
-                                    Command="{Binding DataContext.CompleteOrderCommand,RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                    CommandParameter="{Binding}"/>
+                                    Width="80" Height="30"
+                                    FontSize="12"
+                                    Background="#F97316"
+                                    Foreground="White"
+                                    BorderThickness="0"
+                                    Command="{Binding DataContext.CompleteOrderCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                    CommandParameter="{Binding}">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}"
+                                                CornerRadius="6">
+                                            <ContentPresenter HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <!-- 삭제 버튼-->
+
+                <!-- 삭제 버튼 -->
                 <DataGridTemplateColumn Header="삭제" Width="80">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Content="삭제"
-                                Width="60" Height="25"
-                                Command="{Binding DataContext.DeleteOrderCommand,RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                CommandParameter="{Binding}"/>
+                                    Width="60" Height="30"
+                                    FontSize="12"
+                                    Background="#FFF0E6"
+                                    Foreground="#F97316"
+                                    BorderThickness="0"
+                                    Command="{Binding DataContext.DeleteOrderCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                    CommandParameter="{Binding}">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}"
+                                                CornerRadius="6">
+                                            <ContentPresenter HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Grid.Row="2"
-                Content="닫기"
-                Width="100"
-                Height="40"
-                HorizontalAlignment="Right"
-                Margin="10"
-                Click="CloseButton_Click"/>
+
+        <!-- 하단 버튼 -->
+        <Border Grid.Row="2" Background="White"
+                BorderBrush="#E5E5E5"
+                BorderThickness="0 1 0 0">
+            <Button Content="닫기"
+                    Width="100" Height="40"
+                    Background="#1C1917"
+                    Foreground="White"
+                    BorderThickness="0"
+                    FontSize="14"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Margin="20 0"
+                    Click="CloseButton_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="8">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Border>
     </Grid>
 </Window>
