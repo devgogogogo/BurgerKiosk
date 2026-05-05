@@ -250,7 +250,11 @@ await viewModel.LoadMenusAsync();
 ```bash
 git clone https://github.com/devgogogogo/BurgerKiosk.git
 ```
-3. `appsettings.json` 에서 DB 연결 문자열 확인
+3. Visual Studio 에서 `BurgerKiosk.sln` 열기
+4. NuGet 패키지 복원
+   - 솔루션 탐색기에서 프로젝트 우클릭 → `NuGet 패키지 복원`
+   - 또는 Visual Studio 가 자동으로 복원 제안
+5. `appsettings.json` 에서 DB 연결 문자열 확인
 ```json
 {
   "ConnectionStrings": {
@@ -258,8 +262,5 @@ git clone https://github.com/devgogogogo/BurgerKiosk.git
   }
 }
 ```
-4. 패키지 관리자 콘솔에서 실행
-```
-Update-Database
-```
-5. 빌드 후 실행 (`F5`)
+6. 패키지 관리자 콘솔에서 실행
+7. 빌드 후 실행 (`F5`)
